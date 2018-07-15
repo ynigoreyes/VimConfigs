@@ -44,6 +44,10 @@ call plug#begin('~/.vim/plugged')
       " Use Tab for autocomplete
       inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+  " ### TypeScripts
+    Plug 'leafgarland/typescript-vim'
+    Plug 'quramy/tsuquyomi'
+
   " HTML/CSS
     Plug 'mattn/emmet-vim'
 

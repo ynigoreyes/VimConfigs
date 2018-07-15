@@ -1,6 +1,11 @@
 " Ynigo Reyes
 " This .vimrc includes plugins for basic Web development and my own shortcuts
 
+" I am tired of seeing a Python 3 deprecation warning
+if has('python3')
+  silent! python3 1
+endif
+
 syntax on
 set number
 set ruler
@@ -60,7 +65,7 @@ call plug#begin('~/.vim/plugged')
     
     " This probably will not work anywhere else
     " You can fix this probably by curling a download and putting it in
-    " usr/lib
+    " usr/lib. You can grab this through (linux)brew
     let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
     " Lets me use cmake and doxygen

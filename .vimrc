@@ -6,12 +6,6 @@ if has('python3')
   silent! python3 1
 endif
 
-syntax on
-set number
-set ruler
-set background=dark
-set nowrap
-
 call plug#begin('~/.vim/plugged')
   " Other Stuff
 
@@ -20,13 +14,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'
   Plug 'tomtom/tcomment_vim'
   Plug 'airblade/vim-gitgutter'
-  Plug 'vim-airline/vim-airline'
+  Plug 'bling/vim-airline'
   Plug 'scrooloose/nerdtree'
 
   " ### JavaScript
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
     " YCM Defaults
       " Start autocompletion after 4 chars
@@ -97,6 +92,11 @@ set showmatch
 set autoindent
 set smartindent
 set fileformat=unix
+set number
+set ruler
+set nowrap
+syntax enable
+
 set encoding=utf-8
 
 " KeyMaps - Normal Mode

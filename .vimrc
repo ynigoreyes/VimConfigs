@@ -47,6 +47,7 @@ call plug#begin('~/.vim/plugged')
   " ### TypeScripts
     Plug 'leafgarland/typescript-vim'
     Plug 'quramy/tsuquyomi'
+    Plug 'ianks/vim-tsx'
 
   " HTML/CSS
     Plug 'mattn/emmet-vim'

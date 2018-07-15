@@ -91,7 +91,6 @@ set wildmenu
 set expandtab
 set relativenumber
 set tabstop=2
-set colorcolumn=80
 set softtabstop=2
 set shiftwidth=2
 set showmatch

@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'bling/vim-airline'
   Plug 'scrooloose/nerdtree'
+  Plug 'terryma/vim-multiple-cursors'
 
   " ### JavaScript
     Plug 'pangloss/vim-javascript'
@@ -110,7 +111,11 @@ set encoding=utf-8
   " Use Shift+J or K to copy lines up or down
   :nnoremap <Space-j> yyp
   :nnoremap <Space-k> yy<Up>p
-  
+  " MultiCursor Keymappings
+  let g:multi_cursor_use_default_mapping=0
+  let g:multi_cursor_start_word_key = '<C-d>'
+  let g:multi_cursor_next_key = '<C-d>'
+  let g:multi_cursor_quit_key = '<Esc>'
 
 " KeyMaps - Insert Mode
   :imap jj <Esc>

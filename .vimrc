@@ -21,7 +21,7 @@ call plug#begin('~/.vim/plugged')
   " ### JavaScript
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
     " YCM Defaults
@@ -32,6 +32,7 @@ call plug#begin('~/.vim/plugged')
       " Don't show YCM's preview window [ I find it really annoying ]
       set completeopt=preview
       let g:ycm_add_preview_to_completeopt = 0
+      let g:ycm_server_python_interpreter='/usr/local/bin/python3'
 
     " ## Formating
       let g:javascript_plugin_flow = 1

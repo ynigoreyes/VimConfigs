@@ -26,7 +26,7 @@ call plug#begin('~/.vim/plugged')
 
     " YCM Defaults
       " Start autocompletion after 4 chars
-      let g:ycm_min_num_of_chars_for_completion = 4
+      let g:ycm_min_num_of_chars_for_completion = 3
       let g:ycm_min_num_identifier_candidate_chars = 4
       let g:ycm_enable_diagnostic_highlighting = 0
       " Don't show YCM's preview window [ I find it really annoying ]
@@ -36,7 +36,7 @@ call plug#begin('~/.vim/plugged')
 
     " ## Formating
       let g:javascript_plugin_flow = 1
-      autocmd FileType javascript set formatprg=prettier\ --stdin
+      " autocmd FileType javascript set formatprg=prettier\ --stdin
       " Code Folding
       augroup javascript_folding
         au!
@@ -53,9 +53,16 @@ call plug#begin('~/.vim/plugged')
 
   " HTML/CSS
     Plug 'mattn/emmet-vim'
-
-      let g:user_emmet_install_global = 0
-      autocmd FileType html,css EmmetInstall
+    let g:user_emmet_settings = {
+      \  'javascript.jsx' : {
+      \      'extends': 'jsx',
+      \      'quote_char': "'",
+      \  },
+      \  'typescript.tsx' : {
+      \      'extends': 'jsx',
+      \      'quote_char': "'",
+      \  },
+      \}
 
   " C/C+
     Plug 'rip-rip/clang_complete'
@@ -112,7 +119,7 @@ set encoding=utf-8
   " Use Shift+J or K to copy lines up or down
   :nnoremap <Space-j> yyp
   :nnoremap <Space-k> yy<Up>p
-  " MultiCursor Keymappings
+  " MultiCursor Keymappings Ctrl+d to select and Shift+I to edit it
   let g:multi_cursor_use_default_mapping=0
   let g:multi_cursor_start_word_key = '<C-d>'
   let g:multi_cursor_next_key = '<C-d>'

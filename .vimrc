@@ -10,19 +10,21 @@ call plug#begin('~/.vim/plugged')
   " Other Stuff
 
   Plug 'sjl/badwolf'
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'junegunn/goyo.vim'
   Plug 'tomtom/tcomment_vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'bling/vim-airline'
   Plug 'scrooloose/nerdtree'
   Plug 'terryma/vim-multiple-cursors'
+  Plug 'tpope/vim-surround'
 
   " ### JavaScript
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
-    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+    Plug 'w0rp/ale'
+    " Linting
+      let g:ale_lint_on_enter = 0
+      let b:ale_linters = ['eslint']
 
     " YCM Defaults
       " Start autocompletion after 4 chars
@@ -34,22 +36,12 @@ call plug#begin('~/.vim/plugged')
       let g:ycm_add_preview_to_completeopt = 0
       let g:ycm_server_python_interpreter='/usr/local/bin/python3'
 
-    " ## Formating
-      let g:javascript_plugin_flow = 1
-      " autocmd FileType javascript set formatprg=prettier\ --stdin
-      " Code Folding
-      augroup javascript_folding
-        au!
-        au FileType javascript setlocal foldmethod=syntax
-      augroup END
-      autocmd BufWritePre *.js :normal gggqG
-      " Use Tab for autocomplete
-      inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
   " ### TypeScripts
     Plug 'leafgarland/typescript-vim'
     Plug 'quramy/tsuquyomi'
     Plug 'ianks/vim-tsx'
+    " Compile on Save
+      :autocmd! BufWritePost *.ts,*.tsx :!tsc
 
   " HTML/CSS
     Plug 'mattn/emmet-vim'
@@ -63,6 +55,7 @@ call plug#begin('~/.vim/plugged')
       \      'quote_char': "'",
       \  },
       \}
+    
 
   " C/C+
     Plug 'rip-rip/clang_complete'
@@ -99,12 +92,14 @@ set softtabstop=2
 set shiftwidth=2
 set showmatch
 set autoindent
-set smartindent
 set fileformat=unix
 set number
 set ruler
 set nowrap
+
 syntax enable
+set updatetime=4000
+set nocompatible
 
 set encoding=utf-8
 

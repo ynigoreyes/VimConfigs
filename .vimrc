@@ -16,16 +16,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-surround'
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
   " ### JavaScript
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
-    Plug 'w0rp/ale'
-    " Linting
-      let g:ale_lint_on_enter = 0
-      let b:ale_linters = ['eslint']
-
+    
     " YCM Defaults
       " Start autocompletion after 4 chars
       let g:ycm_min_num_of_chars_for_completion = 3
@@ -41,7 +39,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'quramy/tsuquyomi'
     Plug 'ianks/vim-tsx'
     " Compile on Save
-      :autocmd! BufWritePost *.ts,*.tsx :!tsc
+      :autocmd BufWritePost *.ts,*.tsx :AsyncRun tsc
 
   " HTML/CSS
     Plug 'mattn/emmet-vim'
@@ -114,11 +112,22 @@ set encoding=utf-8
   " Use Shift+J or K to copy lines up or down
   :nnoremap <Space-j> yyp
   :nnoremap <Space-k> yy<Up>p
-  " MultiCursor Keymappings Ctrl+d to select and Shift+I to edit it
+  " MultiCursor Keymappings Ctrl+v to select and Shift+I to edit it
   let g:multi_cursor_use_default_mapping=0
-  let g:multi_cursor_start_word_key = '<C-d>'
-  let g:multi_cursor_next_key = '<C-d>'
+  let g:multi_cursor_start_word_key = '<C-v>'
+  let g:multi_cursor_next_key = '<C-v>'
   let g:multi_cursor_quit_key = '<Esc>'
-
+  " Tabbing
+  :nnoremap <Tab> v<s->>
+  :nnoremap <s-Tab> v<s-<>
+    
 " KeyMaps - Insert Mode
   :imap jj <Esc>
+  " Auto Closing quotes and such
+  :imap { {}<Left>
+  :imap ( ()<Left>
+  :inoremap ' ''<Left>
+  :inoremap " ""<Left>
+  :inoremap < <><Left>
+  :inoremap [ []<Left>
+

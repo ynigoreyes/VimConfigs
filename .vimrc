@@ -19,29 +19,20 @@ call plug#begin('~/.vim/plugged')
   Plug 'skywind3000/asyncrun.vim'
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-  " ### JavaScript
+  " More File Specifics"
+  :filetype plugin on
+
+  " JavaScript "
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
     
-    " YCM Defaults
-      " Start autocompletion after 4 chars
-      let g:ycm_min_num_of_chars_for_completion = 3
-      let g:ycm_min_num_identifier_candidate_chars = 4
-      let g:ycm_enable_diagnostic_highlighting = 0
-      " Don't show YCM's preview window [ I find it really annoying ]
-      set completeopt=preview
-      let g:ycm_add_preview_to_completeopt = 0
-      let g:ycm_server_python_interpreter='/usr/local/bin/python3'
-
-  " ### TypeScripts
+  " TypeScripts "
     Plug 'leafgarland/typescript-vim'
     Plug 'quramy/tsuquyomi'
     Plug 'ianks/vim-tsx'
-    " Compile on Save
-      :autocmd BufWritePost *.ts,*.tsx :AsyncRun tsc
-
-  " HTML/CSS
+    
+  " React "
     Plug 'mattn/emmet-vim'
     let g:user_emmet_settings = {
       \  'javascript.jsx' : {
@@ -55,7 +46,7 @@ call plug#begin('~/.vim/plugged')
       \}
     
 
-  " C/C+
+  " C/C+ "
     Plug 'rip-rip/clang_complete'
     
     " This probably will not work anywhere else
@@ -120,7 +111,7 @@ set encoding=utf-8
   " Tabbing
   :nnoremap <Tab> v<s->>
   :nnoremap <s-Tab> v<s-<>
-    
+
 " KeyMaps - Insert Mode
   :imap jj <Esc>
   " Auto Closing quotes and such
@@ -128,6 +119,5 @@ set encoding=utf-8
   :imap ( ()<Left>
   :inoremap ' ''<Left>
   :inoremap " ""<Left>
-  :inoremap < <><Left>
   :inoremap [ []<Left>
 

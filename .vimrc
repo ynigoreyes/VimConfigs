@@ -18,20 +18,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'bronson/vim-trailing-whitespace'
+  autocmd BufWritePost * :FixWhitespace
 
   " More File Specifics"
   :filetype plugin on
-
+                   
   " JavaScript "
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
-    
+
   " TypeScripts "
     Plug 'leafgarland/typescript-vim'
     Plug 'quramy/tsuquyomi'
     Plug 'ianks/vim-tsx'
-    
+
   " React "
     Plug 'mattn/emmet-vim'
     let g:user_emmet_settings = {
@@ -44,11 +46,11 @@ call plug#begin('~/.vim/plugged')
       \      'quote_char': "'",
       \  },
       \}
-    
+
 
   " C/C+ "
     Plug 'rip-rip/clang_complete'
-    
+
     " This probably will not work anywhere else
     " You can fix this probably by curling a download and putting it in
     " usr/lib. You can grab this through (linux)brew
@@ -61,7 +63,7 @@ call plug#begin('~/.vim/plugged')
   " Makefile (must use 'makefile' in vim)
     autocmd BufRead,BufNewFile makefile set noexpandtab
     autocmd BufRead,BufNewFile makefile set tabstop=4
-     
+
 
 call plug#end()
 

@@ -23,7 +23,7 @@ call plug#begin('~/.vim/plugged')
 
   " More File Specifics"
   :filetype plugin on
-                   
+
   " JavaScript "
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'

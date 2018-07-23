@@ -49,16 +49,17 @@ call plug#begin('~/.vim/plugged')
 
 
   " C/C+ "
-    Plug 'rip-rip/clang_complete'
+  " Disabled by default
+    " Plug 'rip-rip/clang_complete'
 
     " This probably will not work anywhere else
     " You can fix this probably by curling a download and putting it in
     " usr/lib. You can grab this through (linux)brew
-    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+    " let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
     " Lets me use cmake and doxygen
-      let  g:C_UseTool_cmake    = 'yes'
-      let  g:C_UseTool_doxygen = 'yes'
+      " let  g:C_UseTool_cmake    = 'yes'
+      " let  g:C_UseTool_doxygen = 'yes'
 
   " Makefile (must use 'makefile' in vim)
     autocmd BufRead,BufNewFile makefile set noexpandtab

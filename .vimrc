@@ -74,6 +74,7 @@ let NERDTreeShowHidden=1
 map <C-b> :NERDTreeToggle<CR>
 
 " Editor
+set ttyfast
 set hls is
 set backspace=indent,eol,start
 set path+=**

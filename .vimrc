@@ -16,32 +16,33 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-surround'
+  Plug 'w0rp/ale'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'bronson/vim-trailing-whitespace'
+  autocmd BufWritePost * :FixWhitespace
 
-  " ### JavaScript
+  " More File Specifics"
+  :filetype plugin on
+
+  " JavaScript "
     Plug 'pangloss/vim-javascript'
+    Plug 'jelera/vim-javascript-syntax'
     Plug 'mxw/vim-jsx'
-    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
-    
-    " YCM Defaults
-      " Start autocompletion after 4 chars
-      let g:ycm_min_num_of_chars_for_completion = 3
-      let g:ycm_min_num_identifier_candidate_chars = 4
-      let g:ycm_enable_diagnostic_highlighting = 0
-      " Don't show YCM's preview window [ I find it really annoying ]
-      set completeopt=preview
-      let g:ycm_add_preview_to_completeopt = 0
-      let g:ycm_server_python_interpreter='/usr/local/bin/python3'
+    " Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
+    Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+    let g:jsx_ext_required = 1
 
-  " ### TypeScripts
+  " TypeScripts "
     Plug 'leafgarland/typescript-vim'
     Plug 'quramy/tsuquyomi'
     Plug 'ianks/vim-tsx'
-    " Compile on Save
-      :autocmd BufWritePost *.ts,*.tsx :AsyncRun tsc
 
-  " HTML/CSS
+  " React "
+    Plug 'flowtype/vim-flow', { 'autoload': { 'filetypes': 'javascript'} }
     Plug 'mattn/emmet-vim'
     let g:user_emmet_settings = {
       \  'javascript.jsx' : {
@@ -53,26 +54,57 @@ call plug#begin('~/.vim/plugged')
       \      'quote_char': "'",
       \  },
       \}
-    
+    " Flow "
+    let g:flow#autoclose = 1
+    let g:flow#enable = 1
 
-  " C/C+
-    Plug 'rip-rip/clang_complete'
-    
+  " JavaScript Linting "
+  " Asynchronous Lint Engine (ALE)
+    let g:ale_linters = {
+    \  'javascript': ['flow']
+    \}
+    highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+    highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+    let g:ale_sign_error = 'X' " could use emoji
+    let g:ale_sign_warning = '?' " could use emoji
+    let g:ale_statusline_format = ['X %d', '? %d', '']
+    " %linter% is the name of the linter that provided the message
+    " %s is the error or warning message
+    let g:ale_echo_msg_format = '%linter% says %s'
+    " Map keys to navigate between lines with errors and warnings.
+    nnoremap <leader>an :ALENextWrap<cr>
+    nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+
+  " C/C+ "
+  " Disabled by default
+    " Plug 'rip-rip/clang_complete'
+
     " This probably will not work anywhere else
     " You can fix this probably by curling a download and putting it in
     " usr/lib. You can grab this through (linux)brew
-    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+    " let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
     " Lets me use cmake and doxygen
-      let  g:C_UseTool_cmake    = 'yes'
-      let  g:C_UseTool_doxygen = 'yes'
+      " let  g:C_UseTool_cmake    = 'yes'
+      " let  g:C_UseTool_doxygen = 'yes'
 
   " Makefile (must use 'makefile' in vim)
     autocmd BufRead,BufNewFile makefile set noexpandtab
     autocmd BufRead,BufNewFile makefile set tabstop=4
-     
+
 
 call plug#end()
+
+" Deoplete "
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_yarp=1
+set completeopt-=preview
+set pyxversion=3
+set encoding=utf-8
+
+" VimJavascript "
+let g:javascript_plugin_jsdoc = 1
 
 " Configs for NERDTree
 autocmd vimenter * NERDTree
@@ -80,6 +112,8 @@ let NERDTreeShowHidden=1
 map <C-b> :NERDTreeToggle<CR>
 
 " Editor
+set ttyfast
+set hls is
 set backspace=indent,eol,start
 set path+=**
 set wildmenu
@@ -120,7 +154,7 @@ set encoding=utf-8
   " Tabbing
   :nnoremap <Tab> v<s->>
   :nnoremap <s-Tab> v<s-<>
-    
+
 " KeyMaps - Insert Mode
   :imap jj <Esc>
   " Auto Closing quotes and such
@@ -128,6 +162,5 @@ set encoding=utf-8
   :imap ( ()<Left>
   :inoremap ' ''<Left>
   :inoremap " ""<Left>
-  :inoremap < <><Left>
   :inoremap [ []<Left>
 

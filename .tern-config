@@ -1,11 +1,9 @@
 {
   "libs": [
     "browser",
-    "jquery",
     "react"
   ],
   "plugins": {
-      "angular": {},
       "doc_comment": null,
       "es_modules": {},
       "node": {}

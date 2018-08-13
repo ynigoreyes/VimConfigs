@@ -25,6 +25,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'bronson/vim-trailing-whitespace'
   autocmd BufWritePost * :FixWhitespace
 
+  " Tmux "
+  Plug 'christoomey/vim-tmux-navigator'
+
   " More File Specifics"
   :filetype plugin on
 
@@ -32,9 +35,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'pangloss/vim-javascript'
     Plug 'jelera/vim-javascript-syntax'
     Plug 'mxw/vim-jsx'
-    " Plug 'Valloric/YouCompleteMe', { 'do': 'python3 ./install.py --tern-completer' }
     Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+    let g:javascript_plugin_flow = 1
     let g:jsx_ext_required = 1
+    let g:ale_linters = {'javascript': ['eslint']}
 
   " TypeScripts "
     Plug 'leafgarland/typescript-vim'
@@ -54,27 +58,38 @@ call plug#begin('~/.vim/plugged')
       \      'quote_char': "'",
       \  },
       \}
-    " Flow "
-    let g:flow#autoclose = 1
-    let g:flow#enable = 1
 
   " JavaScript Linting "
   " Asynchronous Lint Engine (ALE)
-    let g:ale_linters = {
-    \  'javascript': ['flow']
+  let g:ale_linters = {
+    \  'javascript': ['flow', 'eslint']
     \}
-    highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
-    highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-    let g:ale_sign_error = 'X' " could use emoji
-    let g:ale_sign_warning = '?' " could use emoji
-    let g:ale_statusline_format = ['X %d', '? %d', '']
-    " %linter% is the name of the linter that provided the message
-    " %s is the error or warning message
-    let g:ale_echo_msg_format = '%linter% says %s'
-    " Map keys to navigate between lines with errors and warnings.
-    nnoremap <leader>an :ALENextWrap<cr>
-    nnoremap <leader>ap :ALEPreviousWrap<cr>
 
+  let g:ale_fixers = {
+    \  'javascript': ['eslint'],
+    \}
+
+  let g:ale_fix_on_save = 1
+
+  highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+  highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+
+  let g:ale_sign_error = 'X' " could use emoji
+  let g:ale_sign_warning = '?' " could use emoji
+  let g:ale_statusline_format = ['X %d', '? %d', '']
+
+  " %linter% is the name of the linter that provided the message
+  " %s is the error or warning message
+  let g:ale_echo_msg_format = '%linter%: %s'
+  "
+  " Map keys to navigate between lines with errors and warnings.
+  nnoremap <leader>an :ALENextWrap<cr>
+  nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+
+  " Flow "
+  let g:flow#autoclose = 1
+  let g:flow#enable = 1
 
   " C/C+ "
   " Disabled by default
@@ -112,28 +127,31 @@ let NERDTreeShowHidden=1
 map <C-b> :NERDTreeToggle<CR>
 
 " Editor
-set ttyfast
-set hls is
-set backspace=indent,eol,start
-set path+=**
-set wildmenu
-set expandtab
-set relativenumber
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set showmatch
-set autoindent
-set fileformat=unix
-set number
-set ruler
-set nowrap
+  set ttyfast " Somehow makes vim faster "
+  set hls is " Highlighted search "
+  set backspace=indent,eol,start " Lets me use the backspace button "
+  set path+=** " This lets me use :find "
+  set wildmenu
+  set relativenumber
 
-syntax enable
-set updatetime=4000
-set nocompatible
+  " Always using 2 spaces as tabs except in makefiles "
+  set expandtab
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
 
-set encoding=utf-8
+  set showmatch
+  set autoindent
+  set fileformat=unix
+  set number
+  set ruler
+  set nowrap
+
+  syntax enable
+  set updatetime=4000
+  set nocompatible
+
+  set encoding=utf-8
 
 " KeyMaps - Normal Mode
   " Switch windows use h-f
@@ -160,7 +178,5 @@ set encoding=utf-8
   " Auto Closing quotes and such
   :imap { {}<Left>
   :imap ( ()<Left>
-  :inoremap ' ''<Left>
-  :inoremap " ""<Left>
   :inoremap [ []<Left>
 

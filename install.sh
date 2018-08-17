@@ -1,17 +1,25 @@
 #!bin/bash
 echo "Copying current .vimrc to root directory"
+echo "Must have brew installed"
+
 # Vim Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Cmake for YCMD
 brew update
+
+# Python setup
+brew install python
+
+# Neovim
+pip3 install neovim
+
+# Cmake for YCMD
 brew install cmake
 
 cp .vimrc ~/.vimrc
 cp .tern-config ~/.tern-config
-cp .vim/ftplugin ~/.vim/ftplugin
+cp .vim/ftplugin/* ~/.vim/ftplugin
 
-echo "You must have python 3 installed to run some of the plugins"
-echo "Don't forget to run :PlugInstall!!!"
+echo "\nDon't forget to run :PlugInstall!!!"
 

@@ -127,6 +127,7 @@ let NERDTreeShowHidden=1
 map <C-b> :NERDTreeToggle<CR>
 
 " Editor
+  let mapleader = ","
   set ttyfast " Somehow makes vim faster "
   set hls is " Highlighted search "
   set backspace=indent,eol,start " Lets me use the backspace button "
@@ -154,24 +155,21 @@ map <C-b> :NERDTreeToggle<CR>
   set encoding=utf-8
 
 " KeyMaps - Normal Mode
-  " Switch windows use h-f
-  :nnoremap hf <c-w><c-w>
+  " Search in src for a file
+  :nnoremap <leader>e :e src/**/
+  " Center searched text
+  :nnoremap n nzz
+  :nnoremap N Nzz
   " Use Double Space to save your work
   :nnoremap <Space><Space> :w<kEnter>
-  " Use Crtl+J or K to Flip lines
-  :nnoremap <c-j> ddp
-  :nnoremap <c-k> dd<Up><Up>p
-  " Use Shift+J or K to copy lines up or down
-  :nnoremap <Space-j> yyp
-  :nnoremap <Space-k> yy<Up>p
   " MultiCursor Keymappings Ctrl+v to select and Shift+I to edit it
   let g:multi_cursor_use_default_mapping=0
   let g:multi_cursor_start_word_key = '<C-v>'
   let g:multi_cursor_next_key = '<C-v>'
   let g:multi_cursor_quit_key = '<Esc>'
   " Tabbing
-  :nnoremap <Tab> v<s->>
-  :nnoremap <s-Tab> v<s-<>
+  :nnoremap <Tab> >>
+  :nnoremap <s-Tab> <<
 
 " KeyMaps - Insert Mode
   :imap jj <Esc>

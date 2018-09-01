@@ -9,6 +9,9 @@ endif
 call plug#begin('~/.vim/plugged')
   " Other Stuff
 
+  Plug 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_working_path_mode = 'ra'
+
   Plug 'sjl/badwolf'
   Plug 'tomtom/tcomment_vim'
   Plug 'airblade/vim-gitgutter'
@@ -93,21 +96,23 @@ call plug#begin('~/.vim/plugged')
 
   " C/C+ "
   " Disabled by default
-    " Plug 'rip-rip/clang_complete'
+    Plug 'rip-rip/clang_complete'
 
     " This probably will not work anywhere else
     " You can fix this probably by curling a download and putting it in
     " usr/lib. You can grab this through (linux)brew
-    " let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
+    let g:clang_library_path="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib"
 
     " Lets me use cmake and doxygen
-      " let  g:C_UseTool_cmake    = 'yes'
-      " let  g:C_UseTool_doxygen = 'yes'
+      let  g:C_UseTool_cmake    = 'yes'
+      let  g:C_UseTool_doxygen = 'yes'
 
   " Makefile (must use 'makefile' in vim)
     autocmd BufRead,BufNewFile makefile set noexpandtab
     autocmd BufRead,BufNewFile makefile set tabstop=4
 
+  " Markdown
+    Plug 'suan/vim-instant-markdown'
 
 call plug#end()
 
@@ -160,6 +165,9 @@ map <C-b> :NERDTreeToggle<CR>
   " Center searched text
   :nnoremap n nzz
   :nnoremap N Nzz
+  " Center jump-scrolling
+  :nnoremap <c-d> <c-d>zz
+  :nnoremap <c-u> <c-u>zz
   " Use Double Space to save your work
   :nnoremap <Space><Space> :w<kEnter>
   " MultiCursor Keymappings Ctrl+v to select and Shift+I to edit it

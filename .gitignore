@@ -1,5 +1,2 @@
-*
-
-!~/Public/
-!.vimrc
-!.gitignore
+*.swp
+*.swo

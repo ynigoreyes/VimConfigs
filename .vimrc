@@ -107,6 +107,10 @@ call plug#begin('~/.vim/plugged')
       let  g:C_UseTool_cmake    = 'yes'
       let  g:C_UseTool_doxygen = 'yes'
 
+  " Python
+    Plug 'zchee/deoplete-jedi'
+    let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3'
+
   " Makefile (must use 'makefile' in vim)
     autocmd BufRead,BufNewFile makefile set noexpandtab
     autocmd BufRead,BufNewFile makefile set tabstop=4
@@ -160,6 +164,8 @@ map <C-b> :NERDTreeToggle<CR>
   set encoding=utf-8
 
 " KeyMaps - Normal Mode
+  " Clear Search
+  :nnoremap <leader>/ :noh<kEnter>
   " Search in src for a file
   :nnoremap <leader>e :e src/**/
   " Center searched text
